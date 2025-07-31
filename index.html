@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Bites | Your Restaurant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Hamburger Icon (optional, but good for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-color: #A0522D; /* Sienna - a warm, earthy tone */
+            --secondary-color: #F5DEB3; /* Wheat - a light, complementary tone */
+            --accent-color: #D2691E; /* Chocolate - for CTAs */
+            --text-dark: #333;
+            --text-light: #f8f8f8;
+            --bg-dark: rgba(0, 0, 0, 0.85);
+            --bg-light: #fdfdfd;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Utility Classes */
+        .h-primary {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            padding: 12px;
+            color: var(--primary-color);
+            margin: 1px 0px;
+            text-align: center;
+        }
+
+        .h-secondary {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            padding: 12px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: var(--shadow-medium);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none; /* For anchor tags used as buttons */
+            display: inline-block; /* For anchor tags used as buttons */
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navbar */
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background-color: var(--bg-dark);
+            position: sticky; /* Makes navbar stick to top */
+            top: 0;
+            z-index: 1000; /* Ensure it's above other content */
+            box-shadow: var(--shadow-light);
+        }
+
+        #logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Make logo circular */
+            object-fit: cover;
+            margin: 0; /* Reset margin */
+        }
+
+        #navbar ul {
+            display: flex;
+            list-style: none;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #navbar ul li a {
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #navbar ul li a:hover {
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+        }
+
+        /* Hamburger Menu Icon */
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 1.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        /* Home Section */
+        #home {
+            height: 600px; /* Increased height for better visual impact */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: var(--text-light);
+            padding: 0 20px; /* Add some horizontal padding */
+        }
+
+        #home::before {
+            content: "";
+            background: url('img2.jpg') no-repeat center center/cover; 
+          /* Placeholder, replace with actual image */
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            filter: brightness(0.5); /* Darken background for text readability */
+            z-index: -1;
+            opacity: 0.9; /* Slightly less transparent */
+        }
+
+        #home h1 {
+            color: var(--text-light);
+              
+            font-size: 4.5rem; /* Larger heading */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Stronger shadow for readability */
+        }
+
+        #home p {
+            color: var(--text-light);
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Services Section */
+        #services-container {
+            padding: 50px 20px;
+            background-color: var(--bg-light);
+        }
+
+        #services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
+            gap: 30px; /* Space between boxes */
+            margin-top: 40px;
+        }
+
+        #services .box {
+            flex-basis: calc(33% - 30px); /* Approx 3 boxes per row with gap */
+            min-width: 280px; /* Minimum width for boxes */
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        #services .box:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        #services .box img {
+            height: 120px; /* Smaller service icons */
+            width: 120px;
+            object-fit: cover;
+            border-radius: 50%; /* Circular images */
+            margin-bottom: 20px;
+            border: 3px solid var(--secondary-color);
+        }
+
+        #services .box p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #555;
+            margin-top: 15px;
+        }
+
+        /* Client Section */
+        #client-section {
+            padding: 50px 20px;
+            background-color: var(--secondary-color); /* Light background for clients */
+            text-align: center;
+            position: relative;
+        }
+
+        #client-section::before {
+            content: "";
+            position: absolute;
+            background: url('img5.avif') no-repeat center center/cover; /* Placeholder */
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.2; /* Subtle background */
+        }
+
+        #clients {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px; /* Space between client logos */
+            margin-top: 40px;
+        }
+
+        #clients-item {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        #clients-item:hover {
+            transform: scale(1.05);
+        }
+
+        #clients img {
+            height: 100px; /* Consistent height for client logos */
+            width: auto; /* Maintain aspect ratio */
+            max-width: 180px;
+            filter: grayscale(100%); /* Grayscale for professional look */
+            opacity: 0.7;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        #clients img:hover {
+            filter: grayscale(0%); /* Color on hover */
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 50px 20px;
+            position: relative;
+            background-color: var(--bg-light);
+        }
+
+        #contact::before {
+            content: "";
+            position: absolute;
+            background: url('img5.avif') no-repeat center center/cover; /* Placeholder */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.15; /* Very subtle background */
+        }
+
+        #contactbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        #contactbox form {
+            width: 50%; /* Adjust form width */
+            max-width: 600px; /* Max width for larger screens */
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .formgroup {
+            margin-bottom: 20px;
+        }
+
+        #contactbox label {
+            font-size: 1.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            display: block; /* Make label take full width */
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        #contactbox input,
+        #contactbox textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #contactbox input:focus,
+        #contactbox textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2); /* Focus ring */
+            outline: none;
+        }
+
+        #contactbox textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Design --- */
+
+        /* Tablet & Smaller Desktops */
+        @media (max-width: 992px) {
+            .h-primary {
+                font-size: 3rem;
+            }
+
+            .h-secondary {
+                font-size: 2.2rem;
+            }
+
+            #navbar {
+                padding: 10px 20px;
+            }
+
+            #navbar ul li a {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+
+            #home {
+                height: 500px;
+            }
+
+            #home h1 {
+                font-size: 3.5rem;
+            }
+
+            #home p {
+                font-size: 1.4rem;
+            }
+
+            #services .box {
+                flex-basis: calc(50% - 30px); /* 2 boxes per row */
+            }
+
+            #contactbox form {
+                width: 70%;
+            }
+        }
+
+        /* Mobile Devices */
+        @media (max-width: 768px) {
+            .h-primary {
+                font-size: 2.5rem;
+            }
+
+            .h-secondary {
+                font-size: 1.8rem;
+            }
+
+            /* Navbar for Mobile */
+            #navbar {
+                flex-direction: row; /* Keep logo and toggle on one row */
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+            }
+
+            #navbar ul {
+                display: none; /* Hide menu by default */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 80px; /* Below the logo/toggle bar */
+                left: 0;
+                background-color: var(--bg-dark);
+                box-shadow: var(--shadow-medium);
+                padding-bottom: 10px;
+            }
+
+            #navbar ul.active {
+                display: flex; /* Show menu when active */
+            }
+
+            #navbar ul li {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+            }
+
+            #navbar ul li a {
+                padding: 12px 20px;
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle {
+                display: block; /* Show hamburger icon */
+            }
+
+            #home {
+                height: 450px;
+                padding: 0 15px;
+            }
+
+            #home h1 {
+                font-size: 2.8rem;
+            }
+
+            #home p {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+
+            #services {
+                flex-direction: column; /* Stack service boxes vertically */
+                gap: 20px;
+            }
+
+            #services .box {
+                flex-basis: 100%; /* Full width */
+                margin: 0; /* Reset margin */
+            }
+
+            #clients {
+                gap: 20px;
+            }
+
+            #clients-item {
+                flex-basis: calc(50% - 20px); /* Two items per row */
+                padding: 10px;
+            }
+
+            #clients img {
+                height: 80px;
+            }
+
+            #contactbox form {
+                width: 95%; /* Almost full width */
+                padding: 25px;
+            }
+
+            #contactbox label {
+                font-size: 1.1rem;
+            }
+
+            #contactbox input,
+            #contactbox textarea {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .h-primary {
+                font-size: 2rem;
+            }
+
+            .h-secondary {
+                font-size: 1.6rem;
+            }
+
+            #logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+            #home h1 {
+                font-size: 2.2rem;
+            }
+
+            #home p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+
+            #services .box img {
+                height: 100px;
+                width: 100px;
+            }
+
+            #clients img {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <div id="logo">
+                <img src="img7.png" alt="Delicious Bites Logo"> <!-- Replace with your actual logo -->
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="nav-links">
+                <li class="item"><a href="#home">Home</a></li>
+                <li class="item"><a href="#services-container">Services</a></li>
+                <li class="item"><a href="#client-section">Our Clients</a></li>
+                <li class="item"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h1 class="h-primary">Welcome to Delicious Bites</h1>
+            <p>Experience culinary excellence with our fresh, flavorful dishes.</p>
+            <p>Order your favorite meals online for a delightful experience.</p>
+            <a href="#services-container" class="btn">Explore Our Menu</a>
+        </section>
+
+        <hr>
+
+        <section id="services-container">
+            <h1 class="h-primary">OUR SERVICES</h1>
+            <div id="services">
+                <div class="box">
+                    <img src="img1.jpg" alt="Food Ordering Service"> <!-- Replace with actual image -->
+                    <h2 class="h-secondary">Easy Online Ordering</h2>
+                    <p class="center">Browse our extensive menu, customize your order, and enjoy seamless online payment for a quick and convenient experience.</p>
+                </div>
+                <div class="box">
+                    <img src="img2.jpg" alt="Food Catering Service"> <!-- Replace with actual image -->
+                    <h2 class="h-secondary">Event Catering</h2>
+                    <p class="center">From intimate gatherings to large corporate events, our professional catering service ensures your guests are delighted with exquisite food.</p>
+                </div>
+                <div class="box">
+                    <img src="img3.jpg" alt="Bulk Ordering Service"> <!-- Replace with actual image -->
+                    <h2 class="h-secondary">Bulk & Corporate Orders</h2>
+                    <p class="center">Planning a team lunch or a large family dinner? Our bulk ordering options make it easy and affordable to feed a crowd.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="client-section">
+            <h3 class="h-primary">OUR VALUED CLIENTS</h3>
+            <div id="clients">
+                <div id="clients-item">
+                    <img src="img1.jpg" alt="Client Logo 1"> <!-- Replace with actual client logos -->
+                </div>
+                <div id="clients-item">
+                    <img src="img4.avif" alt="Client Logo 2">
+                </div>
+                <div id="clients-item">
+                    <img src="img2.jpg" alt="Client Logo 3">
+                </div>
+                <div id="clients-item">
+                    <img src="img3.jpg" alt="Client Logo 4">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h1 class="h-primary">GET IN TOUCH</h1>
+            <div id="contactbox">
+                <form action="#" method="POST"> <!-- Add a real action URL for form submission -->
+                    <div class="formgroup">
+                        <label for="name">NAME</label>
+                        <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="formgroup">
+                        <label for="email">EMAIL</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="formgroup">
+                        <label for="phone">PHONE</label>
+                        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="formgroup">
+                        <label for="message">MESSAGE</label>
+                        <textarea name="message" id="message" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn center">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="center">
+            &copy; 2025 Delicious Bites. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Hamburger Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                // Toggle icon between bars and times
+                const icon = mobileMenu.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when a link is clicked (for smooth scrolling)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenu.querySelector('i').classList.remove('fa-times');
+                    mobileMenu.querySelector('i').classList.add('fa-bars');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
